@@ -69,12 +69,10 @@ public class Restaurant {
     }
 
     public int getOrderTotal(List<String> itemNames){
+        // get price of selected items and calculate total
         int total = 0 ;
         for (String itemName: itemNames){
-            Item item = findItemByName(itemName);
-            if(item != null){
-                total += item.getPrice();
-            }
+            total += findItemByName(itemName).getPrice();
         }
         return total;
     }
