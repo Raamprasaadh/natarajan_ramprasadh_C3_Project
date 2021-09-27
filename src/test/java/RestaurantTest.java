@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,4 +81,32 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("Momos"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER TOTAL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void when_no_item_is_selected_the_order_total_should_be_0()
+    {
+        List<String> items = Arrays.asList();
+        int totalAmount = restaurant.getOrderTotal(items);
+        assertEquals(0,totalAmount);
+    }
+
+    @Test
+    public void when_a_single_item_is_selected_the_order_total_should_be_the_price_of_the_item()
+    {
+        List<String> items = Arrays.asList("Sweet corn soup");
+        int totalAmount = restaurant.getOrderTotal(items);
+
+        assertEquals(119,totalAmount);
+    }
+
+    @Test
+    public void when_multiple_items_are_selected_the_total_amount_should_be_total_of_all_items()
+    {
+        List<String> items = Arrays.asList("Sweet corn soup","Vegetable lasagne");
+
+        int totalAmount = restaurant.getOrderTotal(items);
+        assertEquals(388,totalAmount);
+    }
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER TOTAL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
